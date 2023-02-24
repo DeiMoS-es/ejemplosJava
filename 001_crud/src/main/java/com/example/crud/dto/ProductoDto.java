@@ -8,30 +8,33 @@ public class ProductoDto {
 	@NotBlank
 	private String nombre;
 	@Min(0)
-	private float precio;
+	private Float precio;
 	
 	public ProductoDto() {
 		super();
 	}
-	
-	public ProductoDto(String nombre, float precio) {
+		
+	public ProductoDto(@NotBlank String nombre, @Min(0) Float precio) {
 		super();
 		this.nombre = nombre;
 		this.precio = precio;
 	}
-	
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public float getPrecio() {
-		return precio;
-	}
-	public void setPrecio(float precio) {
-		this.precio = precio;
-	}
+	
 	
 	
 }

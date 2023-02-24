@@ -69,7 +69,7 @@ public class ProductoController {
 	public ResponseEntity<?> create(@RequestBody ProductoDto productoDto){
 		if(StringUtils.isBlank(productoDto.getNombre()))
 			return new ResponseEntity(new Mensaje ("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-		if(productoDto.getPrecio() < 0)
+		if( productoDto.getPrecio() == null || productoDto.getPrecio() < 0)
 			return new ResponseEntity(new Mensaje ("el precio debe ser mayor que cero"), HttpStatus.BAD_REQUEST);
 		if(productoService.existByNombre(productoDto.getNombre()))
 			return new ResponseEntity(new Mensaje ("el nombre ya existe"), HttpStatus.BAD_REQUEST);
