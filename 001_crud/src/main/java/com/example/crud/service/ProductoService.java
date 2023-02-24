@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.transaction.Transactional;
 
 import com.example.crud.entity.Producto;
 import com.example.crud.repository.ProductoRepository;
@@ -72,7 +72,7 @@ public class ProductoService {
 	 * @param nombre se le pasará el nombre del producto a buscar
 	 * @return devuelve true o false*/
 	public boolean existByNombre(String nombre) {
-		return productoRepository.existByNombre(nombre);
+		return productoRepository.existsByNombre(nombre);
 	}
 }
 	

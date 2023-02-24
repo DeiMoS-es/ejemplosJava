@@ -12,6 +12,6 @@ public interface ProductoRepository  extends JpaRepository<Producto, Integer>{
 	//Esta clase implementa los métodos principales
 	
 	Optional<Producto> findByNombre(String nombre);
-	boolean existByNombre (String nombre);
+	Boolean existsByNombre (String nombre);
 	
 }
