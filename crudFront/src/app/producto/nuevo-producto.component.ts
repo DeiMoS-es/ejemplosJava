@@ -25,7 +25,6 @@ export class NuevoProductoComponent {
     const producto = new Producto(this.nombre, this.precio);
     this.productoService.save(producto).subscribe(
       data => {
-        this.nombre = data.nombre;
         this.toastr.success('Producto creado', 'Ok', {timeOut: 3000, positionClass: 'toast-top-center'});
         this.router.navigate(['/']);
       },
