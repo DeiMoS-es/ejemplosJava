@@ -67,8 +67,10 @@ public class ProductoController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping("/create")
 	public ResponseEntity<?> create(@RequestBody ProductoDto productoDto){
-		if(StringUtils.isBlank(productoDto.getNombre()))
+		if(StringUtils.isBlank(productoDto.getNombre())) {
+			System.out.println(productoDto.getPrecio());
 			return new ResponseEntity(new Mensaje ("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+		}
 		if( productoDto.getPrecio() == null || productoDto.getPrecio() < 0)
 			return new ResponseEntity(new Mensaje ("el precio debe ser mayor que cero"), HttpStatus.BAD_REQUEST);
 		if(productoService.existByNombre(productoDto.getNombre()))
