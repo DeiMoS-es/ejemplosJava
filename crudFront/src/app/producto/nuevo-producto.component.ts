@@ -26,11 +26,11 @@ export class NuevoProductoComponent {
     this.productoService.save(producto).subscribe(
       data => {
         this.nombre = data.nombre;
-        this.toastr.success('Producto creado', 'Ok', {timeOut: 3000});
+        this.toastr.success('Producto creado', 'Ok', {timeOut: 3000, positionClass: 'toast-top-center'});
         this.router.navigate(['/']);
       },
       err =>{
-        this.toastr.error(err.error.mensaje, 'Fail', {timeOut: 3000});//.mensaje porque en el backend devolvemos un mensaje
+        this.toastr.error(err.error.mensaje, 'Fail', {timeOut: 3000, positionClass: 'toast-top-center'});//.mensaje porque en el backend devolvemos un mensaje
         this.router.navigate(['/']);
       }
     )
