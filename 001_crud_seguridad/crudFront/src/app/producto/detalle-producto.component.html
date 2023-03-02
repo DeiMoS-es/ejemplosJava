@@ -1,0 +1,22 @@
+<div class="contai">
+    <div class="row mt-5" *ngIf="producto"><!--*ngIf mientras no exista el dibujo no pintamos nada-->
+        <div class="col-md4 mx-auto">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header text-center">
+                    Detalle
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>ID:</b> {{producto.id}}</li>
+                    <li class="list-group-item"><b>Nombre:</b> {{producto.nombre}}</li>
+                    <li class="list-group-item"><b>Precio:</b> {{producto.precio}} €</li>
+                </ul>
+                <div class="card-footer">
+                    <button class="btn btn-outline-primary btn-block" (click)="volver()">
+                        <i class="fa-solid fa-backward"></i> Volver
+                    </button>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
