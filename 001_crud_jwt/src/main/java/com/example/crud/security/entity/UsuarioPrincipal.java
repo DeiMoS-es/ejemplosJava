@@ -2,7 +2,6 @@ package com.example.crud.security.entity;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +21,16 @@ public class UsuarioPrincipal implements UserDetails{
 	private String password;
 	
 	private Collection<? extends GrantedAuthority> authorities;
+	
+	public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password,
+			Collection<? extends GrantedAuthority> authorities) {
+		super();
+		this.nombre = nombre;
+		this.nombreUsuario = nombreUsuario;
+		this.email = email;
+		this.password = password;
+		this.authorities = authorities;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,15 +83,7 @@ public class UsuarioPrincipal implements UserDetails{
 		this.email = email;
 	}
 
-	public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password,
-			Collection<? extends GrantedAuthority> authorities) {
-		super();
-		this.nombre = nombre;
-		this.nombreUsuario = nombreUsuario;
-		this.email = email;
-		this.password = password;
-		this.authorities = authorities;
-	}
+	
 	
 	//metodo para asignar privilegios, convertimos un usuario de BBDD para saber sus privilegios
 	public static UsuarioPrincipal build(Usuario usuario) { 
