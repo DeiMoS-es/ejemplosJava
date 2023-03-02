@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Producto } from '../models/producto';
 import { ProductoService } from '../service/producto.service';
 
@@ -11,7 +12,7 @@ export class ListaProductoComponent implements OnInit{
 
   productos: Producto[] = [];//Creo una lista vacía, ya que este modulo es el de listar
   //Inyectamos el servicio credo
-  constructor(private productoService: ProductoService){}
+  constructor(private productoService: ProductoService, private toastr: ToastrService){}
 
   ngOnInit(){
     this.cargarProductos();
@@ -30,6 +31,16 @@ export class ListaProductoComponent implements OnInit{
   }
 
   borrar(id?: number){
-    alert("Borrar el " + id);
+    if(id != undefined){
+      this.productoService.delete(id).subscribe(
+        data =>{
+          this.toastr.success('Producto eliminado', 'Ok', {timeOut: 3000, positionClass: 'toast-top-center'});
+          this.cargarProductos();
+        },
+        err =>{
+          this.toastr.error(err.error.mensaje, 'Fail', {timeOut: 3000, positionClass: 'toast-top-center'});//.mensaje porque en el backend devolvemos un mensaje
+        }
+      );
+    }    
   }
 }
