@@ -32,11 +32,12 @@ export class ProductoService {
   //En el método post hay un requestbody, así lo especificamos en el backend, entonces hay que decirle lo que le vamos a enviar, en este caso un {producto}
   //Si utilizo un post y no envio un requestbody, se le pasarían {} (vacio)
   public save(producto: Producto): Observable<any>{
-    return this.httpClient.post<any>(this.productoUrl + 'create', {producto});
+    console.log(producto)
+    return this.httpClient.post<any>(this.productoUrl + 'create', producto);
   }
 
   public update(id: number ,producto: Producto): Observable<any>{
-    return this.httpClient.put<any>(this.productoUrl + `update/${id}`, {producto});
+    return this.httpClient.put<any>(this.productoUrl + `update/${id}`, producto);
   }
 
   public delete(id: number):Observable<any>{

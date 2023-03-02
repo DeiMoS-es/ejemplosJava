@@ -7,6 +7,7 @@ import { ListaProductoComponent } from './producto/lista-producto.component';
 import { DetalleProductoComponent } from './producto/detalle-producto.component';
 import { NuevoProductoComponent } from './producto/nuevo-producto.component';
 import { EditarProductoComponent } from './producto/editar-producto.component';
+import { ProductoService } from './service/producto.service';
 
 import {HttpClientModule} from '@angular/common/http'
 import {FormsModule} from '@angular/forms'
@@ -31,7 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ProductoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
