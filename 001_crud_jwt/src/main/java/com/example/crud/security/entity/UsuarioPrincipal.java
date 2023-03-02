@@ -1,5 +1,97 @@
 package com.example.crud.security.entity;
 
-public class UsuarioPrincipal {
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+//Claseencargada de generar la seguridad
+//Se podría hacer en Usuario, pero queremos que cada clase haga su funcionalidad y no interfiera con el resto
+public class UsuarioPrincipal implements UserDetails{
+	
+	private String nombre;
+	
+	private String nombreUsuario;
+	
+	private String email;
+	
+	private String password;
+	
+	private Collection<? extends GrantedAuthority> authorities;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return nombreUsuario;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password,
+			Collection<? extends GrantedAuthority> authorities) {
+		super();
+		this.nombre = nombre;
+		this.nombreUsuario = nombreUsuario;
+		this.email = email;
+		this.password = password;
+		this.authorities = authorities;
+	}
+	
+	//metodo para asignar privilegios, convertimos un usuario de BBDD para saber sus privilegios
+	public static UsuarioPrincipal build(Usuario usuario) { 
+		//Obtenemos una lista de GrantedAuthority a partir de los roles
+		List<GrantedAuthority> authorities = usuario.getRoles().stream().map(rol -> new SimpleGrantedAuthority(
+																			rol.getRolNombre().name())).collect(Collectors.toList());
+		
+		return new UsuarioPrincipal(usuario.getNombre(), usuario.getNombreUsuario(), 
+									usuario.getEmail(), usuario.getPassword(), authorities);
+	}
 
 }
